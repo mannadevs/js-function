@@ -107,7 +107,7 @@
 
 // use of promise 
 const marks = 80;
-const paymentSuccess = false;
+const paymentSuccess = true;
 
 function enroll() {
     console.log('Course enrollment is in progress.');
@@ -146,7 +146,7 @@ function getCertificate() {
 
     const promise = new Promise(function (resolve) {
         setTimeout(function() {
-            resolve('Congrats! you got the certificate')
+            resolve('Congrats! you got the certificate');
         }, 1000);
     });
 
@@ -154,12 +154,27 @@ function getCertificate() {
 
 }
 
-enroll()
-    .then(progress)
-    .then(getCertificate)
-    .then(function (value) {
-        console.log(value)
-    })
-    .catch(function (err) {
-        console.log(err);
-    })
+// enroll()
+//     .then(progress)
+//     .then(getCertificate)
+//     .then(function (value) {
+//         console.log(value)
+//     })
+//     .catch(function (err) {
+//         console.log(err);
+//     })
+
+
+
+async function course() {
+    try {
+        await enroll();
+        await progress();
+        console.log(await getCertificate());
+        
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+course()
